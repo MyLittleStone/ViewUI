@@ -22,8 +22,7 @@ Vue.config.debug = true;
 const router = new VueRouter({
     esModule: false,
     mode: 'history',
-    routes: [
-        {
+    routes: [{
             path: '/split',
             component: (resolve) => require(['./routers/split.vue'], resolve)
         },
@@ -238,6 +237,10 @@ const router = new VueRouter({
         {
             path: '/list',
             component: (resolve) => require(['./routers/list.vue'], resolve)
+        },
+        {
+            path: '/tableTest',
+            component: (resolve) => require(['./routers/tableTest.vue'], resolve)
         }
     ]
 });

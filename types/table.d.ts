@@ -94,6 +94,11 @@ export declare class Table extends Vue {
      * @default false
      */
     "row-key"?: boolean;
+
+    /**
+     * 是否可拖动
+     */
+    move?: boolean;
     /**
      * 开启 highlight-row 后有效，当表格的当前行发生变化的时候会触发
      * currentRow：当前高亮行的数据

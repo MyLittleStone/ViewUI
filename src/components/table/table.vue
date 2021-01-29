@@ -10,7 +10,9 @@
                     :column-rows="columnRows"
                     :obj-data="objData"
                     :columns-width="columnsWidth"
-                    :data="rebuildData"></table-head>
+                    :data="rebuildData"
+                    :move="move"
+                    ></table-head>
             </div>
             <div :class="[prefixCls + '-body']" :style="bodyStyle" ref="body" @scroll="handleBodyScroll"
                 v-show="!((!!localeNoDataText && (!data || data.length === 0)) || (!!localeNoFilteredDataText && (!rebuildData || rebuildData.length === 0)))">
@@ -59,7 +61,8 @@
                         :fixed-column-rows="leftFixedColumnRows"
                         :obj-data="objData"
                         :columns-width="columnsWidth"
-                        :data="rebuildData"></table-head>
+                        :data="rebuildData"
+                        :move="move"></table-head>
                 </div>
                 <div :class="[prefixCls + '-fixed-body']" :style="fixedBodyStyle" ref="fixedBody" @mousewheel="handleFixedMousewheel" @DOMMouseScroll="handleFixedMousewheel">
                     <table-body
@@ -95,7 +98,8 @@
                         :fixed-column-rows="rightFixedColumnRows"
                         :obj-data="objData"
                         :columns-width="columnsWidth"
-                        :data="rebuildData"></table-head>
+                        :data="rebuildData"
+                        :move="move"></table-head>
                 </div>
                 <div :class="[prefixCls + '-fixed-body']" :style="fixedBodyStyle" ref="fixedRightBody" @mousewheel="handleFixedMousewheel" @DOMMouseScroll="handleFixedMousewheel">
                     <table-body
@@ -254,6 +258,10 @@
             rowKey: {
                 type: [Boolean, String],
                 default: false
+            },
+            move:{
+                type:Boolean,
+                default:false,
             },
             // 4.0.0
             spanMethod: {
@@ -1333,6 +1341,7 @@
                     column.width = parseInt(column.width);
                     column._width = column.width ? column.width : '';    // update in handleResize()
                     column._sortType = 'normal';
+                    column._moveState = this.move?'move':'';
                     column._filterVisible = false;
                     column._isFiltered = false;
                     column._filterChecked = [];
